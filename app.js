@@ -3,6 +3,7 @@ require('dotenv').config();
 const express = require('express');
 const mongoose = require('mongoose');
 const session = require('express-session');
+const MongoStore = require('connect-mongo');
 const passport = require('passport');
 const flash = require('connect-flash');
 const dotenv = require('dotenv');
@@ -18,6 +19,7 @@ const methodOverride = require('method-override');
 
 const app = express();
 
+const dbUrl = process.env.MONGODB_URI;
 
 app.use(methodOverride('_method'));
 
@@ -28,7 +30,7 @@ app.use((req, res, next) => {
 });
 
 // MongoDB Connection
-mongoose.connect( process.env.MONGODB_URI,  {
+mongoose.connect(dbUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 }).then(() => console.log("MongoDB Connected"))
@@ -43,12 +45,26 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, 'public')));
 app.use(methodOverride('_method'));
 
+const store = MongoStore.create({
+  mongoUrl: dbUrl,
+  crypto: {
+    secret: process.env.SESSION_SECRET
+  },
+  touchAfter: 24 * 3600,
+})
+
+store.on("error", () => {
+  console.log("ERROR in MONGO SESSION STORE", err);
+});
+
 // Sessions
 app.use(session({
+  store,
   secret: process.env.SESSION_SECRET,
   resave: false,
   saveUninitialized: false
 }));
+
 
 app.use(passport.initialize());
 app.use(passport.session());

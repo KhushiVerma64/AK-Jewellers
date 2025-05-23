@@ -1,0 +1,33 @@
+<%- include('partials/header') %>
+
+<div class="container my-5">
+  <h2 class="text-center mb-4">
+    <%= categoryName.charAt(0).toUpperCase() + categoryName.slice(1) %> Collection
+  </h2>
+
+  <div class="row g-4">
+    <% if (products.length === 0) { %>
+      <div class="col-12">
+        <p class="text-center text-muted">No products found in this category.</p>
+      </div>
+    <% } %>
+    <% products.forEach(product => { %>
+      <div class="col-6 col-md-4 mb-4 col-lg-3">
+        <div class="card shadow-sm h-100">
+          <img src="<%= product.image %>" class="card-img-top" alt="<%= product.name %>">
+          <div class="card-body">
+            <h5 class="card-title"><%= product.name %></h5>
+            <p class="card-text small"><%= product.description %></p>
+            <p class="card-text">₹<%= product.price %></p>
+            <span class="badge bg-secondary"><%= product.category %></span>
+          </div>
+          <div class="card-footer text-center">
+            <a href="/products/<%= product._id %>" class="btn btn-primary btn-sm">View Details</a>
+          </div>
+        </div>
+      </div>
+    <% }) %>
+  </div>
+</div>
+
+  <%- include('partials/footer') %>

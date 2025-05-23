@@ -1,0 +1,103 @@
+body {
+  margin: 0;
+  font-family: 'Segoe UI', Arial, sans-serif;
+  background-color: #fffaf5;
+  color: #333;
+}
+
+h2 {
+  text-align: center;
+}
+
+/* Logo */
+.logo-rounded {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Category section */
+.categories {
+  padding: 2rem;
+  background-color: #fffaf2;
+}
+
+.categories h3 {
+  font-size: 1.8rem;
+  margin-bottom: 1.5rem;
+  color: black;
+}
+
+.category-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.category-grid a {
+  text-decoration: none;
+  color: #222;
+  width: 120px;
+}
+
+.category-grid img {
+  width: 100%;
+  border-radius: 50%;
+  border: 3px solid #d4af37;
+  height: 120px;
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.category-grid a:hover img {
+  transform: scale(1.1);
+}
+
+.category-grid span {
+  display: block;
+  margin-top: 0.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+
+@media (max-width: 768px) {
+  .category-grid {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none; /* Firefox */
+  }
+
+  .category-grid::-webkit-scrollbar {
+    display: none; /* Chrome, Safari */
+  }
+
+  .category-grid a {
+    flex: 0 0 auto;
+  }
+}
+
+
+
+/* CONTACT */
+.contact-container {
+  max-width: 800px;
+  margin: auto;
+}
+
+.contact-info {
+  margin-bottom: 20px;
+}
+
+.contact-info i {
+  margin-right: 10px;
+  color: #555;
+}
+
+iframe {
+  width: 100%;
+  height: 300px;
+  border: none;
+}

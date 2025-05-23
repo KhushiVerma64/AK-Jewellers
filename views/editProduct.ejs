@@ -1,0 +1,51 @@
+<%- include('partials/header') %>
+
+<div class="container my-5">
+  <h2 class="text-center mb-4">Edit Product</h2>
+
+  <form action="/products/<%= product._id %>?_method=PUT" method="POST" enctype="multipart/form-data" class="col-md-6 offset-md-3">
+    <div class="mb-3">
+      <label for="name" class="form-label">Product Name</label>
+      <input type="text" name="name" id="name" class="form-control" value="<%= product.name %>" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="description" class="form-label">Description</label>
+      <textarea name="description" id="description" class="form-control" rows="3" required><%= product.description %></textarea>
+    </div>
+
+    <div class="mb-3">
+      <label for="price" class="form-label">Price (₹)</label>
+      <input type="number" name="price" id="price" class="form-control" value="<%= product.price %>" required>
+    </div>
+
+    <div class="mb-3">
+      <label for="image" class="form-label">Change Image (optional)</label>
+      <input type="file" name="image" id="image" class="form-control">
+      <% if (product.image) { %>
+        <small class="text-muted">Current: <%= product.image %></small>
+      <% } %>
+    </div>
+
+<div class="mb-3">
+  <label for="category" class="form-label">Category</label>
+  <select name="category" id="category" class="form-control" required>
+    <option value="">Select Category</option>
+    <option value="ring" <%= product.category === 'ring' ? 'selected' : '' %>>Ring</option>
+    <option value="bangles" <%= product.category === 'bangles' ? 'selected' : '' %>>Bangles</option>
+    <option value="necklace" <%= product.category === 'necklace' ? 'selected' : '' %>>Necklace</option>
+    <option value="bracelet" <%= product.category === 'bracelet' ? 'selected' : '' %>>Bracelet</option>
+    <option value="pandent" <%= product.category === 'pandent' ? 'selected' : '' %>>Pandent</option>
+    <option value="earing" <%= product.category === 'earing' ? 'selected' : '' %>>Earing</option>
+    <option value="nosepin" <%= product.category === 'nosepin' ? 'selected' : '' %>>Nosepin</option>
+    <option value="payal" <%= product.category === 'payal' ? 'selected' : '' %>>Payal</option>
+  </select>
+</div>
+
+
+    <button type="submit" class="btn btn-success">Update Product</button>
+    <a href="/gallery" class="btn btn-secondary ms-2">Cancel</a>
+  </form>
+</div>
+
+<%- include('partials/footer') %>

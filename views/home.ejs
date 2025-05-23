@@ -1,0 +1,91 @@
+<%- include('partials/header') %>
+
+  <section class="hero">
+    <h2 class="wlc">Welcome to AK Jewellers</h2>
+    <% if (user) { %>
+      <h2>Welcome, <%= user.username %>!</h2>
+      <% } %>
+  </section>
+
+  <section class="categories">
+    <h3>Explore Our Categories</h3>
+    <div class="category-grid">
+      <a href="/category/ring">
+        <img src="/images/ring.jpg" alt="Ring">
+        <span>Ring</span>
+      </a>
+      <a href="/category/bangles">
+        <img src="/images/bangles.jpg" alt="bangles">
+        <span>bangles</span>
+      </a>
+      <a href="/category/necklace">
+        <img src="/images/necklace.jpg" alt="Necklace">
+        <span>Necklace</span>
+      </a>
+      <a href="/category/bracelet">
+        <img src="/images/bracelet.jpg" alt="Bracelet">
+        <span>Bracelet</span>
+      </a>
+      <a href="/category/pandent">
+        <img src="/images/pandent.jpg" alt="pandent">
+        <span>Pandent</span>
+      </a>
+      <a href="/category/earing">
+        <img src="/images/earing.jpg" alt="earing">
+        <span>Earing</span>
+      </a>
+      <a href="/category/nosepin">
+        <img src="/images/nosepin.jpg" alt="nosepin">
+        <span>Nosepin</span>
+      </a>
+      <a href="/category/payal">
+        <img src="/images/payal.jpg" alt="payal">
+        <span>Payal</span>
+      </a>
+    </div>
+  </section>
+
+  <% if (user) { %>
+    <div class="text-end mb-3 me-3">
+      <a href="/products/add" class="btn btn-success"> Add Product</a>
+    </div>
+    <% } %>
+
+      <!--  Banner -->
+      <div id="bannerCarousel" class="carousel slide mb-4" data-bs-ride="carousel">
+        <div class="carousel-inner">
+
+          <div class="carousel-item active">
+            <img src="/images/banner1.jpg" class="d-block w-100 img-fluid" alt="Banner 1">
+          </div>
+
+          <div class="carousel-item">
+            <img src="/images/banner2.jpg" class="d-block w-100 img-fluid" alt="Banner 2">
+          </div>
+
+          <div class="carousel-item">
+            <img src="/images/banner3.jpg" class="d-block w-100 img-fluid" alt="Banner 3">
+          </div>
+
+          <div class="carousel-item">
+            <img src="/images/banner4.jpg" class="d-block w-100 img-fluid" alt="Banner 4">
+          </div>
+
+          <!-- Navigation controls -->
+          <button class="carousel-control-prev" type="button" data-bs-target="#bannerCarousel" data-bs-slide="prev">
+            <span class="carousel-control-prev-icon"></span>
+          </button>
+          <button class="carousel-control-next" type="button" data-bs-target="#bannerCarousel" data-bs-slide="next">
+            <span class="carousel-control-next-icon"></span>
+          </button>
+
+          <!-- Indicators Sliders -->
+          <div class="carousel-indicators">
+            <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="0" class="active"></button>
+            <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="1"></button>
+            <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="2"></button>
+            <button type="button" data-bs-target="#bannerCarousel" data-bs-slide-to="3"></button>
+          </div>
+        </div>
+
+        <%- include('partials/footer') %>

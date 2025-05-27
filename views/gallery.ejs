@@ -5,9 +5,13 @@
       <div class="col-md-4 mb-4">
         <div class="card shadow-sm h-100">
           <% if (product.image) { %>
-            <img src="<%= product.image %>" class="card-img-top" alt="<%= product.name %>">
+            <a href="/products/<%= product._id %>">
+              <img src="<%= product.image %>" class="card-img-top" alt="<%= product.name %>">
+            </a>
             <% } else { %>
-              <img src="/images/default.jpg" class="card-img-top" alt="No Image">
+              <a href="/products/<%= product._id %>">
+                <img src="/images/default.jpg" class="card-img-top" alt="No Image">
+              </a>
               <% } %>
 
                 <div class="card-body">

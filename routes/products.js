@@ -2,47 +2,35 @@ const express = require('express');
 const router = express.Router();
 const Product = require('../models/product');
 const multer = require('multer');
+const { storage } = require('../config/cloudinary');
 const { isAuthenticated, isOwner } = require('../middleware/auth');
-
-// Set storage engine
-const storage = multer.diskStorage({
-  destination: function (req, file, cb) {
-    cb(null, 'public/uploads');
-  },
-  filename: function (req, file, cb) {
-    cb(null, Date.now() + '-' + file.originalname);
-  }
-});
-
-// Init upload
-const upload = multer({ storage: storage });
+const upload = multer({ storage });
 
 // Show add product form
 router.get('/add',isAuthenticated,  (req, res) => {
   res.render('add-product');
 });
 
-
-// POST route to add product
 router.post('/add', isAuthenticated, upload.single('image'), async (req, res) => {
   try {
-    console.log('Uploaded file:', req.file);
-
+    // console.log('Uploaded file:', JSON.stringify(req.file, null, 2));
+    
     const newProduct = new Product({
       name: req.body.name,
       description: req.body.description,
       price: req.body.price,
-      category: req.body.category,  
-      image: req.file ? '/uploads/' + req.file.filename : '',
+      category: req.body.category,
+      image: req.file.path,  
       createdBy: req.user._id
     });
 
     await newProduct.save();
     console.log('Product saved:', newProduct); 
     res.redirect('/gallery');
+
   } catch (err) {
-    console.error(err);
-    res.status(500).send('Error uploading product');
+    console.error('Error uploading product:', JSON.stringify(err, null, 2));
+    res.status(500).send(`<pre>${err.message}\n\n${JSON.stringify(err, null, 2)}</pre>`);
   }
 });
 
@@ -66,7 +54,7 @@ router.get('/search', async (req, res) => {
   const query = req.query.q;
   try {
     const products = await Product.find({
-      name: { $regex: query, $options: 'i' } // case-insensitive
+      name: { $regex: query, $options: 'i' } // case-insensitive  
     });
 
     res.render('gallery', { products });
@@ -121,22 +109,5 @@ router.get('/category/:categoryName', async (req, res) => {
     res.status(500).send("Server Error");
   }
 });
-
-
-// // for searchbar
-// router.get('/search', async (req, res) => {
-//   const query = req.query.q;
-//   try {
-//     const products = await Product.find({
-//       name: { $regex: query, $options: 'i' } // case-insensitive
-//     });
-
-//     res.render('gallery', { products });
-//   } catch (err) {
-//     console.error(err);
-//     res.status(500).send('Error searching products');
-//   }
-// });
-
 
 module.exports = router;

@@ -11,12 +11,12 @@
 
     <div class="mb-3">
       <label for="description" class="form-label">Description</label>
-      <textarea name="description" id="description" class="form-control" rows="3" required><%= product.description %></textarea>
+      <textarea name="description" id="description" class="form-control" rows="3"><%= product.description %></textarea>
     </div>
 
     <div class="mb-3">
       <label for="price" class="form-label">Price (₹)</label>
-      <input type="number" name="price" id="price" class="form-control" value="<%= product.price %>" required>
+      <input type="number" name="price" id="price" class="form-control" value="<%= product.price %>">
     </div>
 
     <div class="mb-3">
